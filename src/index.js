@@ -6,7 +6,18 @@ import connectDB from "./db/db.js"
  dotevn.config({path:'./env'});
  
 
-
+ connectDB()
+ .then(()=>{
+  app.on("error",(error)=>{
+    console.log("Error:",error);
+  })
+  app.listen(process.env.PORT || 8000,()=>{
+    console.log(`app is listening on port ${process.env.PORT}`);
+  })
+ })
+ .catch((error)=>{
+  console.log("Error connecting to MongoDB:", error);
+ })
 
 // import express from "express";
 // const app = express();
